@@ -14,11 +14,11 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
     private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    private UserRepo userRepo;
+    public static UserRepo userRepo;
 
     @Autowired
     public UserServiceImpl(UserRepo userRepo) {
-        this.userRepo = userRepo;
+        UserServiceImpl.userRepo = userRepo;
     }
 
     public User create(User user){

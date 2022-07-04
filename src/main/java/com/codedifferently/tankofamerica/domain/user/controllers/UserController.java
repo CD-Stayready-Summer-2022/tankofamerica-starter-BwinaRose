@@ -7,6 +7,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.util.List;
+
 @ShellComponent
 public class UserController {
     private UserService userService;
@@ -15,6 +17,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
 
     @ShellMethod("Create a new User")
     public User createNewUser(@ShellOption({"-F", "--firstname"}) String firstName,
@@ -31,4 +34,5 @@ public class UserController {
     public String getAllUsers(){
         return userService.getAllUsers();
     }
+
 }
