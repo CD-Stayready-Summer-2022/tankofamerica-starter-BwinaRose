@@ -22,9 +22,14 @@ public class UserServiceImpl implements UserService {
     }
 
     public User create(User user){
-
         return userRepo.save(user);
     }
+
+    @Override
+    public User update(User user) {
+        return userRepo.save(user);
+    }
+
 
     public String getAllUsers(){
         StringBuilder builder = new StringBuilder();

@@ -5,6 +5,7 @@ import com.codedifferently.tankofamerica.domain.user.models.User;
 
 public interface UserService {
     User create(User user);
+    User update(User user);
     String getAllUsers();
     User getById(Long userId) throws UserNotFoundException;
 }

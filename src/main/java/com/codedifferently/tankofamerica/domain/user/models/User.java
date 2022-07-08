@@ -3,6 +3,8 @@ package com.codedifferently.tankofamerica.domain.user.models;
 import com.codedifferently.tankofamerica.domain.account.models.Account;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
@@ -13,7 +15,9 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
+    @Email
     private String email;
+    @Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$")
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="owner")

@@ -1,5 +1,6 @@
 package com.codedifferently.tankofamerica.domain.account.services;
 
+import com.codedifferently.tankofamerica.domain.account.exceptions.AccountNotFoundException;
 import com.codedifferently.tankofamerica.domain.account.models.Account;
 import com.codedifferently.tankofamerica.domain.account.repos.AccountRepo;
 import com.codedifferently.tankofamerica.domain.user.exceptions.UserNotFoundException;
@@ -9,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
     private AccountRepo accountRepo;
     private UserService userService;
@@ -30,8 +33,17 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public String getById(String id) {
-        return null;
+    public Account getById(String id) throws AccountNotFoundException {
+        UUID parsedId = null;
+        try {
+            parsedId = UUID.fromString(id);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+        Optional<Account> optional = accountRepo.findById(parsedId);
+        if(optional.isEmpty())
+            throw new AccountNotFoundException(String.format("Account with id %s not found", id));
+        return optional.get();
     }
 
     @Override
@@ -39,19 +51,15 @@ public class AccountServiceImpl implements AccountService{
         StringBuilder builder = new StringBuilder();
         User owner = userService.getById(userId);
         List<Account> accounts = accountRepo.findByOwner(owner);
-        for (Account account: accounts) {
+        for (Account account : accounts) {
             builder.append(account.toString() + "\n");
         }
         return builder.toString().trim();
     }
 
-    @Override
     public Account update(Account account) {
-        return null;
+        accountRepo.save(account);
+        return account;
     }
 
-    @Override
-    public Boolean delete(String id) {
-        return null;
-    }
 }
