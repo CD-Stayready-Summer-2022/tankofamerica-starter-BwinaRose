@@ -50,7 +50,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void createTest01() throws AccountNotFoundException {
+    public void createTransactionTest01() throws AccountNotFoundException {
         UUID id = UUID.fromString("1eb2c8c2-902c-437e-954f-e5487bf1dd5d");
         BDDMockito.doReturn(trans).when(transactionRepo).save(trans);
         Transaction actual = transactionService.createTransaction(id, trans);
@@ -65,10 +65,5 @@ public class TransactionServiceTest {
         Assertions.assertEquals(String.valueOf(trans), actual);
     }
 
-    @Test
-    public void getByIdTest02() {
-        UUID id = UUID.fromString("1eb2c8c2-902c-437e-954f-e5487bf1dd5d");
-        BDDMockito.doReturn(Optional.empty()).when(transactionRepo).findById(id);
-        Assertions.assertThrows(TransactionNotFoundException.class,()->transactionService.getTransactionById(id));
-    }
+    //test makeWithdrawl, makeDeposit, makeTransfer
 }

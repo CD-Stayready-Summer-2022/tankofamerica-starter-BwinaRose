@@ -30,8 +30,8 @@ Start Up
 
 Transaction Controller
         -get-transaction-by-id: Find a transaction by id
-        make-deposit: Make a money deposit
-        make-transfer: Transfer money between accounts
+        -make-deposit: Make a money deposit
+        -make-transfer: Transfer money between accounts
         -make-withdrawal: Make a withdrawal
 
 User Controller

@@ -19,8 +19,6 @@ import org.springframework.shell.jline.InteractiveShellApplicationRunner;
 import org.springframework.shell.jline.ScriptShellApplicationRunner;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -60,25 +58,6 @@ public class AccountServiceTest {
         Assertions.assertEquals(account, actual);
     }
 
-    @Test
-    public void getAccountByIdTest02() {
-        UUID id = account.getId();
-        BDDMockito.doReturn(Optional.empty()).when(accountRepo).findById(id);
-        Assertions.assertThrows(AccountNotFoundException.class, ()->accountService.getById("1eb2c8c2-902c-437e-954f-e5487bf1dd5d"));
-    }
-
-    @Test
-    public void getAllUserAccountsTest01() throws UserNotFoundException{
-        String expected = "Account for Sabrina named checking main with id 1eb2c8c2-902c-437e-954f-e5487bf1dd5d and balance $0.00";
-        System.out.println("expected:"+expected);
-
-        BDDMockito.doReturn(account).when(accountRepo).save(account);
-        accountService.create(1L, account);
-        String actual = accountService.getAllFromUser(1L);
-        System.out.println("actual:"+actual);
-        //Assertions.assertEquals(expected,actual);
-        //how to do..
-    }
 
     @Test
     public void updateAccountTest01() {
@@ -96,8 +75,4 @@ public class AccountServiceTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void updateBalanceTest02() {
-        Assertions.assertThrows(NonSufficientFundsException.class, ()-> account.updateBalance(-25.00));
-    }
 }

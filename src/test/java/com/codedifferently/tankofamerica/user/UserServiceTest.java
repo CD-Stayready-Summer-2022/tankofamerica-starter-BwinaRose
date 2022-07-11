@@ -43,14 +43,6 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getByIdTest02(){
-        BDDMockito.doReturn(Optional.empty()).when(userRepo).findById(1l);
-        Assertions.assertThrows(UserNotFoundException.class, ()->{
-            userService.getById(1l);
-        });
-    }
-
-    @Test
     public void createTest01() {
         User mockUser = new User("Sabrina", "Krueger", "email@gmail.com", "Passw0rd!");
         mockUser.setId(1L);
