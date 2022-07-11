@@ -2,8 +2,8 @@ create-new-user Pika Chu pikapika@gmail.com thunderb0lT!
 create-new-account 15 checking
 get-user-accounts 15
 make-withdrawal ae117d89-d526-4472-aac9-376bc0405edd 1
-            make-deposit ae117d89-d526-4472-aac9-376bc0405edd 100
-            make-transfer ae117d89-d526-4472-aac9-376bc0405edd 8947fa51-b0ef-4a35-847c-32ece3eab202 50.0
+make-deposit ae117d89-d526-4472-aac9-376bc0405edd 100
+make-transfer ae117d89-d526-4472-aac9-376bc0405edd 8947fa51-b0ef-4a35-847c-32ece3eab202 50.0
 check-account-balance ae117d89-d526-4472-aac9-376bc0405edd
 get-all-users
 update-user 9 Chika Fujiwara fujiwara.chika@gmail.com CH1KA<3chik@

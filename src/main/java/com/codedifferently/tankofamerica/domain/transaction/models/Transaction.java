@@ -15,7 +15,7 @@ public class Transaction {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name= "uuid2", strategy = "uuid2")
-//    @Type(type="uuid-char")
+    @Type(type="uuid-char")
     private UUID id;
     private Double amount;
 
@@ -59,7 +59,7 @@ public class Transaction {
     }
 
     public String toString() {
-        return String.format("Amount: %.2f Account id: %s", amount, account.getId().toString());
+        return String.format("amount: %.2f account id: %s", amount, account.getId().toString());
     }
 
     @Override
