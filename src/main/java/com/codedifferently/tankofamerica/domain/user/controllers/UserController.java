@@ -40,7 +40,7 @@ public class UserController {
         try {
             user = userService.getById(userId);
         } catch (UserNotFoundException e) {
-            System.out.printf("User with id %d does not exist%n", userId);
+            System.out.printf("User with id %d does not exist %n", userId);
         }
         return user;
     }

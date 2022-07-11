@@ -58,15 +58,6 @@ public class AccountServiceTest {
         Assertions.assertEquals(account, actual);
     }
 
-
-    @Test
-    public void updateAccountTest01() {
-        account.setBalance(250.00);
-        BDDMockito.doReturn(account).when(accountRepo).save(account);
-        Account actual = accountService.update(account);
-        Assertions.assertEquals(account, actual);
-    }
-
     @Test
     public void updateBalanceTest01() throws NonSufficientFundsException {
         account.updateBalance(250.00);

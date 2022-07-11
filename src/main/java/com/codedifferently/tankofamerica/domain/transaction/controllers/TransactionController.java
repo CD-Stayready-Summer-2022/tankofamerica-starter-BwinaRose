@@ -25,24 +25,6 @@ public class TransactionController {
         this.accountService = accountService;
     }
 
-    @ShellMethod("Make a money deposit")
-    public String makeDeposit(@ShellOption({"-I", "--accountid"}) UUID accountId,
-                          @ShellOption({"A", "--amount"}) Double amount) throws AccountNotFoundException {
-        try {
-            Account account = accountService.getById(String.valueOf(accountId));
-            if (account == null){
-                throw new AccountNotFoundException("User account not found");
-            }
-            account.updateBalance(amount);
-            account = accountService.update(account);
-            Transaction transaction = new Transaction(amount, account);
-            transactionService.createTransaction(accountId, transaction);
-            return transaction.toString();
-        } catch (AccountNotFoundException | NonSufficientFundsException e) {
-            return e.getMessage();
-        }
-    }
-
     @ShellMethod("Make a withdrawl")
     public String makeWithdrawal(@ShellOption({"-I", "--accountid"}) String accountId,
                              @ShellOption({"-A", "--amount"}) Double amount) throws AccountNotFoundException {
@@ -66,6 +48,33 @@ public class TransactionController {
         }
     }
 
+    @ShellMethod("Make a money deposit")
+    public String makeDeposit(@ShellOption({"-I", "--accountid"}) UUID accountId,
+                              @ShellOption({"A", "--amount"}) Double amount) throws AccountNotFoundException {
+        try {
+            Account account = accountService.getById(String.valueOf(accountId));
+            if (account == null){
+                throw new AccountNotFoundException("User account not found");
+            }
+            account.updateBalance(amount);
+            account = accountService.update(account);
+            Transaction transaction = new Transaction(amount, account);
+            transactionService.createTransaction(accountId, transaction);
+            return transaction.toString();
+        } catch (AccountNotFoundException | NonSufficientFundsException e) {
+            return e.getMessage();
+        }
+    }
+
+    @ShellMethod("Transfer money between accounts")
+    public String makeTransfer(@ShellOption({"-F", "--accountid"}) String accountFrom,
+                               @ShellOption({"-T", "--accountid"}) String accountTo,
+                               @ShellOption({"-A", "--amount"}) Double amount) throws AccountNotFoundException {
+        makeWithdrawal(accountFrom,amount);
+        makeDeposit(UUID.fromString(accountTo),amount);
+        return String.format("Transfered %s from %s to %s",amount,accountFrom,accountTo);
+    }
+
     @ShellMethod("Find a transaction by id")
     public Transaction getTransactionById(@ShellOption({"-I", "--transactionId"}) UUID transactionId) {
         Transaction transaction = null;
@@ -77,13 +86,5 @@ public class TransactionController {
         return transaction;
     }
 
-    @ShellMethod("Transfer money between accounts")
-    public String makeTransfer(@ShellOption({"-F", "--accountid"}) String accountFrom,
-                               @ShellOption({"-T", "--accountid"}) String accountTo,
-                               @ShellOption({"-A", "--amount"}) Double amount) throws AccountNotFoundException, NonSufficientFundsException {
-        makeWithdrawal(accountFrom,amount);
-        makeDeposit(UUID.fromString(accountTo),amount);
-        String transfer = String.format("Transfered %s from %s to %s",amount,accountFrom,accountTo);
-        return transfer;
-    }
+
 }
