@@ -45,6 +45,8 @@ public class UserController {
         return user;
     }
 
+
+
     @ShellMethod("Update user information")
     public String updateUser(@ShellOption({"-I", "--userid"}) Long userId,
                              @ShellOption({"-F", "--firstname"}) String firstName,

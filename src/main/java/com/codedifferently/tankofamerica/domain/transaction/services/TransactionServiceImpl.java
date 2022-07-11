@@ -2,13 +2,17 @@ package com.codedifferently.tankofamerica.domain.transaction.services;
 
 import com.codedifferently.tankofamerica.domain.account.exceptions.AccountNotFoundException;
 import com.codedifferently.tankofamerica.domain.account.models.Account;
+import com.codedifferently.tankofamerica.domain.account.repos.AccountRepo;
 import com.codedifferently.tankofamerica.domain.account.services.AccountService;
 import com.codedifferently.tankofamerica.domain.transaction.exceptions.TransactionNotFoundException;
 import com.codedifferently.tankofamerica.domain.transaction.models.Transaction;
 import com.codedifferently.tankofamerica.domain.transaction.repos.TransactionRepo;
+import com.codedifferently.tankofamerica.domain.user.models.User;
+import com.codedifferently.tankofamerica.domain.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,14 +29,14 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction create(String accountId, Transaction transaction) throws AccountNotFoundException {
-        Account account = accountService.getById(accountId);
+    public Transaction createTransaction(UUID accountId, Transaction transaction) throws AccountNotFoundException {
+        Account account = accountService.getById(String.valueOf(accountId));
         transaction.setAccount(account);
         return transactionRepo.save(transaction);
     }
 
     @Override
-    public Transaction getById(Long id) throws TransactionNotFoundException {
+    public Transaction getTransactionById(UUID id) throws TransactionNotFoundException {
         Optional<Transaction> optional = transactionRepo.findById(id);
         if (optional.isEmpty()) {
             throw new TransactionNotFoundException(String.format("Transaction with id: %s not found", id));
@@ -40,44 +44,4 @@ public class TransactionServiceImpl implements TransactionService {
         return optional.get();
     }
 
-    @Override
-    public String getAllFromAccount(String accountId) {
-        return null;
-    }
-
-    @Override
-    public String getAllWithdrawals(String accountId) {
-        return null;
-    }
-
-    @Override
-    public String getAllDeposits(String accountId) {
-        return null;
-    }
-
-    @Override
-    public Transaction getFirstTransaction(String accountId) {
-        return null;
-    }
-
-    @Override
-    public Transaction getMostRecentTransaction(String accountId) {
-        return null;
-    }
-
-    public TransactionRepo getTransactionRepo() {
-        return transactionRepo;
-    }
-
-    public void setTransactionRepo(TransactionRepo transactionRepo) {
-        this.transactionRepo = transactionRepo;
-    }
-
-    public AccountService getAccountService() {
-        return accountService;
-    }
-
-    public void setAccountService(AccountService accountService) {
-        this.accountService = accountService;
-    }
 }

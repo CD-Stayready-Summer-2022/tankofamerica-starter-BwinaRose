@@ -15,7 +15,7 @@ public class Transaction {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name= "uuid2", strategy = "uuid2")
-    @Type(type="uuid-char")
+//    @Type(type="uuid-char")
     private UUID id;
     private Double amount;
 
@@ -74,4 +74,5 @@ public class Transaction {
     public int hashCode() {
         return Objects.hash(id, amount, account);
     }
+
 }

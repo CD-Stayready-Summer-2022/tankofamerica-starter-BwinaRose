@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -47,5 +48,5 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException(String.format("User with id {} not found", userId));
         return optional.get();
     }
-
+    
 }

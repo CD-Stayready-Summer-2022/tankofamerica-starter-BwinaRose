@@ -32,6 +32,7 @@ public class StartUp {
             case 0:
                 SignUp signup = new SignUp();
                 User user = signup.signUp();
+                startup();
                 break;
             case 1:
                 SignIn signin = new SignIn();

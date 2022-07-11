@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import static com.codedifferently.tankofamerica.domain.user.services.UserServiceImpl.userRepo;
+
 public class SignIn {
     private String email;
     private String password;
@@ -26,7 +28,7 @@ public class SignIn {
     }
 
     public List<User> signIn() throws IOException, UserEmailNotValid, UserPasswordNotValid {
-        UserServiceImpl usi = new UserServiceImpl(UserServiceImpl.userRepo);
+        UserServiceImpl usi = new UserServiceImpl(userRepo);
         UserController uc = new UserController(usi);
         StringBuilder builder = new StringBuilder();
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -34,6 +36,8 @@ public class SignIn {
         email = input.readLine();
         System.out.println(".----------------.\n| Enter Password |\n'----------------'");
         password = input.readLine();
-        String users = uc.getAllUsers();
-        String[] userArr;
-        userArr = users.split("\n");
+        List<User> users = userRepo.findByEmail(email);
+        //User user = users.get();
+        return null;
+    }
+}

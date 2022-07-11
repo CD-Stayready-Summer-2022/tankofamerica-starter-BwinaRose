@@ -1,0 +1,41 @@
+create-new-user Pika Chu pikapika@gmail.com thunderb0lT!
+create-new-account 15 checking
+get-user-accounts 15
+make-withdrawal ae117d89-d526-4472-aac9-376bc0405edd 1
+            make-deposit ae117d89-d526-4472-aac9-376bc0405edd 100
+            make-transfer ae117d89-d526-4472-aac9-376bc0405edd 8947fa51-b0ef-4a35-847c-32ece3eab202 50.0
+check-account-balance ae117d89-d526-4472-aac9-376bc0405edd
+get-all-users
+update-user 9 Chika Fujiwara fujiwara.chika@gmail.com CH1KA<3chik@
+get-user-by-id 9
+
+
+
+
+
+
+
+
+
+
+                COMMANDS
+
+Account Controller
+        -create-new-account: Create a new account
+        -check-account-balance: Get account by id
+        -get-user-accounts: Get user accounts
+
+Start Up
+        startup: Start program
+
+Transaction Controller
+        -get-transaction-by-id: Find a transaction by id
+        make-deposit: Make a money deposit
+        make-transfer: Transfer money between accounts
+        -make-withdrawal: Make a withdrawal
+
+User Controller
+        -create-new-user: Create a new User
+        -get-all-users: Get All Users
+        -get-user-by-id: Get user by id
+        -update-user: Update user information

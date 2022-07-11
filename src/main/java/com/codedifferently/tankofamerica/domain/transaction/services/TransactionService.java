@@ -7,11 +7,7 @@ import com.codedifferently.tankofamerica.domain.transaction.models.Transaction;
 import java.util.UUID;
 
 public interface TransactionService {
-    Transaction create(String accountId, Transaction transaction) throws AccountNotFoundException;
-    Transaction getById(Long id) throws TransactionNotFoundException;
-    String getAllFromAccount(String accountId);
-    String getAllWithdrawals(String accountId);
-    String getAllDeposits(String accountId);
-    Transaction getFirstTransaction(String accountId);
-    Transaction getMostRecentTransaction(String accountId);
+    Transaction createTransaction(UUID accountID, Transaction transaction) throws AccountNotFoundException;
+    Transaction getTransactionById(UUID accountID) throws TransactionNotFoundException;
+    //String getAllTransactions(UUID accountID) throws AccountNotFoundException;
 }

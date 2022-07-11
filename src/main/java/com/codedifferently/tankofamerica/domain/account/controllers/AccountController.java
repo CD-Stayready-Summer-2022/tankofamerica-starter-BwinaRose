@@ -28,12 +28,12 @@ public class AccountController {
             account = accountService.create(id, account);
             return account.toString();
         } catch (UserNotFoundException e) {
-            return "The User Id is invalid";
+            return "The User id is invalid";
         }
     }
 
-    @ShellMethod("Get account by id")
-    public Account getAccountById(@ShellOption({"-I", "--accountid"}) String accountId) {
+    @ShellMethod("check balance of account")
+    public Account checkAccountBalance(@ShellOption({"-I", "--accountid"}) String accountId) {
         Account account = null;
         try {
             account = accountService.getById(accountId);
@@ -44,12 +44,12 @@ public class AccountController {
     }
 
     @ShellMethod("Get user accounts")
-    public String userAccounts(@ShellOption({"-U", "--user"}) Long id) {
+    public String getUserAccounts(@ShellOption({"-U", "--user"}) Long id) {
         try {
             String accounts = accountService.getAllFromUser(id);
             return accounts;
         } catch (UserNotFoundException e) {
-            return "The user Id is invalid";
+            return "The user id is invalid";
         }
     }
 }

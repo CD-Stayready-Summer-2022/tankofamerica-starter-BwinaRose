@@ -8,4 +8,5 @@ public interface UserService {
     User update(User user);
     String getAllUsers();
     User getById(Long userId) throws UserNotFoundException;
+
 }
